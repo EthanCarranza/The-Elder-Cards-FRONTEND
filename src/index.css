@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Cyrodiil";
+  src: local("Cyrodiil"), url("/fonts/Cyrodiil.otf") format("opentype"),
+    url("/fonts/Cyrodiil.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "Cyrodiil";
+  src: local("Cyrodiil Bold"),
+    url("/fonts/Cyrodiil-Bold.otf") format("opentype"),
+    url("/fonts/Cyrodiil-Bold.otf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Cyrodiil", "Times New Roman", Georgia, serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #000;
+}
+
+@media (max-width: 767px) {
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    font-size: 16px;
+  }
+
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (min-width: 1536px) {
+  body {
+    overflow-x: hidden;
+    background-color: #000;
+  }
+
+  .overflow-y-auto {
+    scroll-behavior: smooth;
+  }
+
+  #root {
+    width: 100vw;
+    min-height: 100vh;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.card-3d-wrapper {
+  perspective: 1200px;
+}
+
+.card-3d {
+  --card-rotate-x: 0deg;
+  --card-rotate-y: 0deg;
+  --card-translate-y: 0px;
+  --card-shadow: 0 18px 32px rgba(0, 0, 0, 0.35);
+  --card-depth: 0px;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: rotateX(var(--card-rotate-x, 0deg))
+    rotateY(var(--card-rotate-y, 0deg)) translateY(var(--card-translate-y, 0px));
+  box-shadow: var(--card-shadow, 0 18px 32px rgba(0, 0, 0, 0.35));
+  will-change: transform, box-shadow;
+}
+
+.card-3d:hover,
+.card-3d:focus-visible {
+  --card-translate-y: -6px;
+  --card-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+  --card-depth: 18px;
+}
+
+.card-3d:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 4px;
+}
+
+.card-3d-element {
+  transform: translateZ(var(--card-depth, 0px));
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
