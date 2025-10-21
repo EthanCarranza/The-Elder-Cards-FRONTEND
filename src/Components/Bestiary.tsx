@@ -127,8 +127,9 @@ const Bestiary = () => {
           response = await apiFetch("/bestiary/artifacts?page=1&limit=1000");
           if (response.status === 200) {
             const data = response.data as { artifacts: BestiaryEntry[] };
-            setEntries(data.artifacts || []);
-            setSelectedEntry((data.artifacts && data.artifacts[0]) || null);
+            const sortedArtifacts = (data.artifacts || []).slice().sort((a, b) => a.name.localeCompare(b.name));
+            setEntries(sortedArtifacts);
+            setSelectedEntry((sortedArtifacts && sortedArtifacts[0]) || null);
           } else {
             setError(
               "Error al cargar artefactos: " + (response.statusText || "")
