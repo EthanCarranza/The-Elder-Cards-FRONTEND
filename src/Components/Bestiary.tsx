@@ -42,6 +42,7 @@ const Bestiary = () => {
     _id: string;
     name: string;
     description?: string;
+    effect?: string;
     element?: string;
     discipline?: string;
     type?: string;
@@ -388,7 +389,7 @@ const Bestiary = () => {
                     <img
                       src={selectedEntry.img}
                       alt={selectedEntry.name}
-                      className="w-full max-w-xl mx-auto h-48 lg:h-64 object-cover rounded-lg border-4 border-gray-700 shadow-2xl shadow-black/50"
+                      className="w-full max-w-xl mx-auto h-100 object-cover rounded-lg border-4 border-gray-700 shadow-2xl shadow-black/50"
                       loading="lazy"
                     />
                   </div>
@@ -567,12 +568,18 @@ const Bestiary = () => {
                             key={spell._id}
                             className="bg-blue-900/40 border border-blue-700 rounded-lg p-3 text-white font-serif shadow"
                           >
-                            <div className="font-bold text-blue-300 text-base mb-1">
+                            <div className="font-bold text-blue-300 text-base pb-1">
                               {spell.name}
                             </div>
-                            <div className="text-sm text-gray-200 italic mb-1">
+                            <div className="text-sm text-gray-200 italic pb-1">
                               {spell.description}
                             </div>
+                            {spell.effect && (
+                              <div className="text-xs text-blue-200 pb-1">
+                                <span className="font-semibold">Efecto:</span>{" "}
+                                {spell.effect}
+                              </div>
+                            )}
                             <div className="flex flex-wrap gap-2 mt-1">
                               {spell.element && (
                                 <span className="px-2 py-1 bg-blue-800 text-blue-200 rounded-full text-xs border border-blue-400">
