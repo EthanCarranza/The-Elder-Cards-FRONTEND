@@ -117,7 +117,6 @@ export const useSocketNotifications = (): UseSocketNotificationsReturn => {
     
     serverUrl = serverUrl.replace(/\/api\/v1\/?$/, "");
     
-    console.log("Conectando Socket.IO a:", serverUrl);
 
     const socket = io(serverUrl, {
       auth: {
@@ -132,19 +131,16 @@ export const useSocketNotifications = (): UseSocketNotificationsReturn => {
     socketRef.current = socket;
 
     socket.on("connect", () => {
-      console.log("Socket.IO conectado exitosamente");
       setConnected(true);
       setError(null);
       socket.emit("request_initial_counts");
     });
 
-    socket.on("disconnect", (reason) => {
-      console.log("Socket.IO desconectado:", reason);
+    socket.on("disconnect", () => {
       setConnected(false);
     });
 
     socket.on("connect_error", (err) => {
-      console.error("Socket.IO error de conexión:", err.message);
       setError(`Error de conexión: ${err.message}`);
       setConnected(false);
     });
@@ -169,14 +165,12 @@ export const useSocketNotifications = (): UseSocketNotificationsReturn => {
     });
 
     socket.on("new_friend_request", (request) => {
-      console.log("📨 Socket: Nueva solicitud de amistad recibida", request);
       if (newFriendRequestCallbackRef.current) {
         newFriendRequestCallbackRef.current(request);
       }
     });
 
     socket.on("friend_request_response", (response) => {
-      console.log("📨 Socket: Respuesta a solicitud recibida", response);
       if (friendRequestResponseCallbackRef.current) {
         friendRequestResponseCallbackRef.current(response);
       }
