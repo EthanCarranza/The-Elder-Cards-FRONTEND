@@ -157,8 +157,7 @@ const Bestiary = () => {
   };
 
   return (
-    <PageLayout contentClassName="max-h-[150dvh] flex flex-col font-serif bg-gray-900">
-      {/* Only show upload panel if admin */}
+    <PageLayout contentClassName="xl:max-h-[150dvh] lg:max-h-[200dvh] flex flex-col font-serif bg-gray-900">
       {showUploadPanel && isAdmin && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
           <div className="bg-gray-900 border-2 border-green-700 rounded-lg p-8 shadow-2xl max-w-md w-full relative">
